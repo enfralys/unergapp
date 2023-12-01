@@ -2,6 +2,7 @@ import { classToPlain, Exclude } from "class-transformer";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { UserAuthSessionEntity } from "../../auth/entity/user_auth_session.entity";
 import { RoleEntity } from "../../role/entity/role.entity";
+import { PeopleEntity } from "src/modules/people/entity/people.entity";
 
 @Entity('users')
 export class UserEntity {
@@ -40,6 +41,9 @@ export class UserEntity {
   @ManyToOne(() => RoleEntity, role => role.users)
   @JoinColumn({name: 'role_id', referencedColumnName: 'id'})
   role: RoleEntity
+
+  @OneToMany(() => PeopleEntity, subordinado => subordinado.owner)
+  subordinados: PeopleEntity[];
 
   toJSON() {
     return classToPlain(this);

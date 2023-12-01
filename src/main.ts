@@ -23,6 +23,7 @@ async function bootstrap() {
     }
   }));
 
+  
   if (process.env.ENV == NODE_ENV.DEVELOPMENT) {
     const swaggerOptions = new DocumentBuilder()
       .setTitle('NESTJS Auth with Roles and Permissions')
@@ -31,12 +32,16 @@ async function bootstrap() {
       .addBearerAuth()
       .build();
 
+
     const document = SwaggerModule.createDocument(app, swaggerOptions, {
       ignoreGlobalPrefix: false,
     });
     SwaggerModule.setup('api/v1/docs', app, document);
   }
 
+
   await app.listen(port, "0.0.0.0");
+
 }
 bootstrap();
+

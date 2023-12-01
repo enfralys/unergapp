@@ -1,3 +1,4 @@
+import { PeopleModule } from './modules/people/people.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -11,27 +12,31 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpExceptionFilter } from './shared/filters';
 import * as winston from 'winston';
 import { WinstonModule } from 'nest-winston';
-import 'dotenv/config'
+import 'dotenv/config';
 import { NODE_ENV } from './shared/enums';
 import { HttpConsoleLoggerInterceptor } from './shared/interceptors';
 
-let winstoTransports = []
+let winstoTransports = [];
 
-if(process.env.ENV === NODE_ENV.PRODUCTION) {
+if (process.env.ENV === NODE_ENV.PRODUCTION) {
   winstoTransports = [
-    new winston.transports.File({ filename: `logs/${new Date().toLocaleDateString().replace(/\//g, '-')}/error.log`, level: 'error' })
-  ]
-}else {
-  winstoTransports = [
-    new winston.transports.Console()
-  ]
+    new winston.transports.File({
+      filename: `logs/${new Date()
+        .toLocaleDateString()
+        .replace(/\//g, '-')}/error.log`,
+      level: 'error',
+    }),
+  ];
+} else {
+  winstoTransports = [new winston.transports.Console()];
 }
 
 @Module({
   imports: [
+    PeopleModule,
     TypeOrmModule.forRoot(ormconfig),
     WinstonModule.forRoot({
-      transports: winstoTransports
+      transports: winstoTransports,
     }),
     AuthModule,
     UserModule,
