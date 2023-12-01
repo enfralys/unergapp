@@ -9,6 +9,7 @@ import { PeopleService } from './people.service';
 import { CurrentUser } from 'src/shared/decorators';
 import { AuthGuard } from '@nestjs/passport';
 import { UserEntity } from '../user/entity/user.entity';
+import { CreatePeopleDto } from './dto/people.dto';
 
 
 @ApiTags('People')
@@ -17,7 +18,7 @@ export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
 
   @ApiOperation({ summary: 'Crear una nueva persona' })
-  @ApiBody({ type: PeopleEntity })
+  @ApiBody({ type: CreatePeopleDto })
   @ApiResponse({ status: 201, description: 'La persona ha sido creada satisfactoriamente.' })
   @UseGuards(AuthGuard('jwt'))
   @Post()
