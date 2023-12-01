@@ -10,6 +10,7 @@ import { ValidationFilter } from './shared/filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT || 3000;
 
   app.enableCors()
   app.setGlobalPrefix('api/v1');
@@ -36,6 +37,6 @@ async function bootstrap() {
     SwaggerModule.setup('api/v1/docs', app, document);
   }
 
-  await app.listen(process.env.APP_PORT || 3000, "0.0.0.0");
+  await app.listen(port, "0.0.0.0");
 }
 bootstrap();
