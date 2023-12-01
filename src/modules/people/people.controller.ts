@@ -3,7 +3,7 @@ https://docs.nestjs.com/controllers#controllers
 */
 
 import { Controller, Get, Post, Put, Delete, Param, Body, NotFoundException, HttpStatus, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { PeopleEntity } from './entity/people.entity';
 import { PeopleService } from './people.service';
 import { CurrentUser } from 'src/shared/decorators';
@@ -17,6 +17,7 @@ export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
 
   @ApiOperation({ summary: 'Crear una nueva persona' })
+  @ApiBody({ type: PeopleEntity })
   @ApiResponse({ status: 201, description: 'La persona ha sido creada satisfactoriamente.' })
   @UseGuards(AuthGuard('jwt'))
   @Post()
