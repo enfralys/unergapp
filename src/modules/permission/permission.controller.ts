@@ -66,4 +66,5 @@ export class PermissionController implements CrudController<PermissionEntity> {
     return Object.values(routeResources)
   }
 
+
 }
