@@ -64,7 +64,8 @@ export class AuthService {
     let hashedPassword = await hashPassword(dto.password)
     dto = {
       ...dto,
-      password: hashedPassword
+      password: hashedPassword,
+      
     }
 
     user = await this.usersRepository.create(dto)

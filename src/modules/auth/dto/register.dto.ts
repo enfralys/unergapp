@@ -13,4 +13,9 @@ export class RegisterDTO {
   @IsNotEmpty({message: 'Password is required.'})
   password: string
 
+  
+
+  role_id: number
+
+
 }
