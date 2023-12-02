@@ -25,6 +25,7 @@ export default class SeedUsers implements Seeder {
         email: 'user@mail.com',
         password: await hashPassword('password'),
         role_id: userRole.id
+        
       },
     ];
     await connection.getRepository(tableName).save([...users], { chunk: 500 });
