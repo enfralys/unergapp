@@ -3,6 +3,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, One
 import { UserAuthSessionEntity } from "../../auth/entity/user_auth_session.entity";
 import { RoleEntity } from "../../role/entity/role.entity";
 import { PeopleEntity } from "src/modules/people/entity/people.entity";
+import { AreaEntity } from "../entity/area.entity";
+
 
 @Entity('users')
 export class UserEntity {
@@ -44,6 +46,10 @@ export class UserEntity {
 
   @OneToMany(() => PeopleEntity, subordinado => subordinado.owner)
   subordinados: PeopleEntity[];
+
+  @ManyToOne(() => AreaEntity, area => area.id)
+  @JoinColumn({ name: 'area_id' }) // Nombre de la columna en UserEntity que almacena el ID del área
+  area: AreaEntity;
 
   toJSON() {
     return classToPlain(this);

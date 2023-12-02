@@ -20,4 +20,10 @@ export class UserController {
     return await this.userService.findAll()
   }
 
+    @Get('areas')
+async findAllAreas() {
+    return await this.userService.findAllAreas()
+  }
+
+
 }

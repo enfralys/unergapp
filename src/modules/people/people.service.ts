@@ -34,6 +34,7 @@ export class PeopleService {
         return await this.peopleRepository.find({where:{owner:user}});
       }
       
+      
     
       async findOne(id: string): Promise<PeopleEntity | undefined> {
         return await this.peopleRepository.findOne(id);
@@ -50,7 +51,7 @@ export class PeopleService {
       }
 
 
-      
+
 
 
 
