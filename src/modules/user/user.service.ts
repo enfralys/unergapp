@@ -13,8 +13,10 @@ export class UserService {
     @InjectRepository(AreaEntity) private areaRepository: Repository<AreaEntity>
   ) {}
 
-  async findAll() {
-    return await this.usersRepository.find()
+  async findAll(user: UserEntity) {
+    return await this.usersRepository.find({
+     create_by: user.id
+    })
   }
 
   async findAllAreas() {

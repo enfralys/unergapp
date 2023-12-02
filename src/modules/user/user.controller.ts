@@ -16,10 +16,9 @@ export class UserController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'), PermissionGuard)
-  @HasPermissionDecorator(ROUTE_RESOURCE.USERS)
   @Get()
-  async findAll() {
-    return await this.userService.findAll()
+  async findAll(@CurrentUser() user: UserEntity) {
+    return await this.userService.findAll(user)
   }
 
     @Get('areas')
