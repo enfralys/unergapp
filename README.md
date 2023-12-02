@@ -52,7 +52,7 @@ $ npm run db:setup
 $ npm run migration:generate -n <migration_name>
 
 # Create an empty migration file
-$ npm run migration:create -n <migration_name>
+$ 
 
 # Running the migration
 $ npm run migration:up
