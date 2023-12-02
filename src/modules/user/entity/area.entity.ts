@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "./user.entity";
 
 @Entity('area')
 export class AreaEntity {
@@ -7,6 +8,9 @@ export class AreaEntity {
 
   @Column()
   name: string;
+
+@OneToMany(() => UserEntity, user => user.area)
+users: UserEntity[];
 
   // Otras propiedades de la entidad AreaEntity si es necesario
 }

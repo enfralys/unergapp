@@ -18,6 +18,21 @@ export class UserEntity {
   })
   email: string
 
+  //name and last name
+  @Column({
+    type: 'text',
+    nullable: true
+  })
+  name: string
+
+  @Column({
+    type: 'text',
+    nullable: true
+
+  })
+  last_name: string
+
+
   @Exclude()
   @Column({
     type: 'text'
@@ -40,6 +55,10 @@ export class UserEntity {
   @OneToMany(() => UserAuthSessionEntity, session => session.user)
   auth_sessions: UserAuthSessionEntity[]
 
+  @ManyToOne(() => AreaEntity, area => area.users)
+  @JoinColumn({name: 'area_id', referencedColumnName: 'id'})
+  area: AreaEntity;
+
   @ManyToOne(() => RoleEntity, role => role.users)
   @JoinColumn({name: 'role_id', referencedColumnName: 'id'})
   role: RoleEntity
@@ -47,9 +66,22 @@ export class UserEntity {
   @OneToMany(() => PeopleEntity, subordinado => subordinado.owner)
   subordinados: PeopleEntity[];
 
-  @ManyToOne(() => AreaEntity, area => area.id)
-  @JoinColumn({ name: 'area_id' }) // Nombre de la columna en UserEntity que almacena el ID del área
-  area: AreaEntity;
+//area_id
+  @Column({
+    type: 'integer',
+    nullable: true
+  })
+  area_id: number;
+    
+
+
+  @Column({
+    type: 'text',
+    nullable: true
+  })
+  create_by: string;
+
+
 
   toJSON() {
     return classToPlain(this);

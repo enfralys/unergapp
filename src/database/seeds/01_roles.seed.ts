@@ -12,6 +12,13 @@ export default class SeedRoles implements Seeder {
       {
         name: 'User'
       },
+      {
+        name: 'Decano'
+      },
+      {
+        name: 'Patrullero'
+      }
+
     ];
     await connection.getRepository(tableName).save([...roles], { chunk: 500 });
   }
