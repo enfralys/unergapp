@@ -28,9 +28,12 @@ export class PeopleController {
 
   @ApiOperation({ summary: 'Obtener todas las personas' })
   @ApiResponse({ status: 200, description: 'Devuelve todas las personas.' })
+  @UseGuards(AuthGuard('jwt'))
+
   @Get()
-  async findAll(): Promise<PeopleEntity[]> {
-    return await this.peopleService.findAll();
+  
+  async findAll(@CurrentUser()user: UserEntity): Promise<PeopleEntity[]> {
+    return await this.peopleService.findAll(user);
   }
 
   @ApiOperation({ summary: 'Obtener una persona por su ID' })

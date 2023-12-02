@@ -9,7 +9,6 @@ export class PeopleEntity {
 
   @Column({
     type: 'text',
-    unique: true
   })
   name: string
 
@@ -35,7 +34,12 @@ export class PeopleEntity {
   @UpdateDateColumn()
   updated_at: Date
 
-
+  //voted
+  @Column({
+    type: 'boolean',
+    default: false
+  })
+  voted: boolean
 
   toJSON() {
     return classToPlain(this);

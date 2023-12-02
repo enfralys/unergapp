@@ -7,7 +7,12 @@ import { PeopleEntity } from './entity/people.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../user/entity/user.entity';
-
+export class CreationPeopleObject {
+  name: string;
+  last_name: string;
+  identification: string;
+  owner: UserEntity;
+}
 @Injectable()
 export class PeopleService {
 
@@ -18,12 +23,17 @@ export class PeopleService {
     async create(peopleData: Partial<PeopleEntity>, user:UserEntity): Promise<PeopleEntity> {
         peopleData.owner = user;
         const newPeople = this.peopleRepository.create(peopleData);
-        return await this.peopleRepository.save(newPeople);
+        const response = await this.peopleRepository.save(newPeople);
+
+        
+        return response;
+        
       }
     
-      async findAll(): Promise<PeopleEntity[]> {
-        return await this.peopleRepository.find();
+      async findAll(user:UserEntity): Promise<PeopleEntity[]> {
+        return await this.peopleRepository.find({where:{owner:user}});
       }
+      
     
       async findOne(id: string): Promise<PeopleEntity | undefined> {
         return await this.peopleRepository.findOne(id);
@@ -38,6 +48,13 @@ export class PeopleService {
         const result = await this.peopleRepository.delete(id);
         return result.affected > 0;
       }
+
+
+      
+
+
+
+
     }
 
 
