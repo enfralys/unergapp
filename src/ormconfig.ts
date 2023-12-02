@@ -25,19 +25,19 @@ const config: ConnectionOptions = {
 
   // Run migrations automatically,
   // you can disable this if you prefer running migration manually.
-  migrationsRun: true,
+ // migrationsRun: true,
   logging: process.env.ENV === NODE_ENV.DEVELOPMENT ? true : false,
   logger: 'file',
 
   // Allow both start:prod and start:dev to use migrations
   // __dirname is either dist or src folder, meaning either
   // the compiled js in prod or the ts in dev.
-  migrations: [__dirname + '/database/migrations/**/*{.ts,.js}'],
-  cli: {
+ // migrations: [__dirname + '/database/migrations/**/*{.ts,.js}'],
+ // cli: {
     // Location of migration should be inside src folder
     // to be compiled into dist/ folder.
-    migrationsDir: 'src/database/migrations',
-  },
+  //  migrationsDir: 'src/database/migrations',
+ // },
 };
 
 export = config;

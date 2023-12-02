@@ -14,8 +14,10 @@ export class UserService {
   ) {}
 
   async findAll(user: UserEntity) {
+   //querybuilder que haga join con la misma tabla para traer los usuarios creador por el que consulta
     return await this.usersRepository.find({
-     create_by: user.id
+      where: { create_by: user.id },
+      relations: ['role','area','subordinados']
     })
   }
 
