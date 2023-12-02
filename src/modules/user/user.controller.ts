@@ -21,6 +21,14 @@ export class UserController {
     return await this.userService.findAll(user)
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), PermissionGuard)
+  @Get('admin')
+  async findAllAdmin(@CurrentUser() user: UserEntity) {
+    return await this.userService.findAllAdmin(user)
+  }
+
+
     @Get('areas')
 async findAllAreas() {
     return await this.userService.findAllAreas()

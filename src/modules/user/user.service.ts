@@ -21,6 +21,20 @@ export class UserService {
     })
   }
 
+  async findAllAdmin(user: UserEntity) {
+    //querybuilder que haga join con la misma tabla para traer los usuarios creador por el que consulta
+    if (user.role.id != 1) 
+    {
+      throw new HttpException("No tiene permisos para realizar esta acción.", HttpStatus.BAD_REQUEST)
+      
+    }
+     return await this.usersRepository.find({
+       where: { role_id: 4 },
+       relations: ['role','area','subordinados']
+     })
+   }
+
+
   async findAllAreas() {
     return await this.areaRepository.find()
   }
