@@ -13,9 +13,13 @@ export class RegisterDTO {
   @IsNotEmpty({message: 'Password is required.'})
   password: string
 
-  
-
+  @IsNotEmpty({message: 'name is required.'})
+  name: string
+  @IsNotEmpty({message: 'last_name is required.'})
+  last_name: string
+  @IsNotEmpty({message: 'role_id is required.'})
   role_id: number
 
-
+  @IsNotEmpty({message: 'area_id is required.'})
+  area_id: number
 }
