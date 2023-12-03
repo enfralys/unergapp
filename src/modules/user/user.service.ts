@@ -28,10 +28,30 @@ export class UserService {
       throw new HttpException("No tiene permisos para realizar esta acción.", HttpStatus.BAD_REQUEST)
       
     }
-     return await this.usersRepository.find({
-       where: { role_id: 4 },
-       relations: ['role','area','subordinados']
-     })
+     //querybuilder que haga join con la misma tabla para traer los usuarios creador por el que consulta
+    //return await this.usersRepository.find
+
+    const usersRole4 = await this.usersRepository.find({
+      where: { role_id: 4 },
+      relations: ['role','area']
+    })
+
+    //usuarios que pertencecan a los usuarios del rol 4
+ 
+
+    //unir en una respuesta
+    const userResponse = []
+    //agregar los usuarios del rol 3 al mismo json de cada usuario del rol 4
+  for (const iterator of usersRole4) {
+    const usersOfUser = await this.usersRepository.find({
+      where: { create_by: iterator.id },
+      relations: ['role','area','subordinados']
+    })
+
+    userResponse.push({...iterator,users:usersOfUser})
+  }
+
+    return userResponse
    }
 
 
