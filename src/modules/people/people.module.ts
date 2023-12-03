@@ -8,10 +8,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PeopleEntity } from './entity/people.entity';
 
+
 @Module({
   imports: [TypeOrmModule.forFeature([PeopleEntity]),
 ],
   controllers: [PeopleController],
+
   providers: [PeopleService],
 })
 export class PeopleModule {}
